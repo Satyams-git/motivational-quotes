@@ -1,19 +1,18 @@
-# Use the official OpenJDK 17 image as the base image
-FROM openjdk:17-jdk-alpine
+# eclipse-temurin is the official successor to openjdk on Docker Hub
+FROM eclipse-temurin:17-jdk-alpine
 
 # Set the working directory inside the container
 WORKDIR /app
 
-# Copy the source code into the container
-COPY src/Main.java /app/Main.java
-
+# Copy source and quotes file
+COPY src/Main.java Main.java
 COPY quotes.txt quotes.txt
 
-# Compile the Java code
+# Compile the Java source
 RUN javac Main.java
 
-# Expose port 8000 for the HTTP server
+# Expose the HTTP server port
 EXPOSE 8000
 
-# Run the Java application when the container starts
+# Run the application
 CMD ["java", "Main"]
